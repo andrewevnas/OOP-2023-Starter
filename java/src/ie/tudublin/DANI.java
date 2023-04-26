@@ -4,21 +4,24 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 
 public class DANI extends PApplet {
-    
+
+     // ArrayList for storing words and their follows
     ArrayList<Word> model = new ArrayList<Word>();
 
+	// Processing setup function to set window size
     public void settings() {
         size(500, 500);
         //fullScreen(SPAN);
     }
 
-
+	// Processing setup function to set color mode, frame rate, and load the text file
     public void setup() {
         colorMode(HSB);
-		frameRate(1);
+		frameRate(4);
         loadFile("shakespere.txt");
     }
 
+	// Function to load text file into memory and generate the word model
     public void loadFile(String filename) {
         String[] lines = loadStrings(filename);
 
@@ -29,16 +32,20 @@ public class DANI extends PApplet {
                 String word = words[i];
                 String nextWord = words[i + 1];
 
+				// Find the word in the model, add it if it doesn't exist
+
                 Word w = findWord(word);
                 if (w == null) {
                     w = new Word(word);
                     model.add(w);
                 }
+				 // Add the follow word to the current word
+				
                 w.addFollow(nextWord);
             }
         }
     }
-
+	// Function to find a word in the model
     public Word findWord(String word) {
         for (Word w : model) {
             if (w.getWord().equals(word)) {
@@ -47,7 +54,7 @@ public class DANI extends PApplet {
         }
         return null;
     }
-
+	 // Function to find the follows for a given word
     public ArrayList<Follow> findFollow(String word) {
         for (Word w : model) {
             if (w.getWord().equals(word)) {
@@ -56,7 +63,8 @@ public class DANI extends PApplet {
         }
         return null;
     }
-
+	
+	// Function to generate a sonnet on key press
     public void keyPressed() {
 		if (key == ' ') {
 		  // Generate a new sonnet
@@ -78,8 +86,10 @@ public class DANI extends PApplet {
 			System.out.println();
 		}
 	}
-
+	// Array to hold generated sonnet text
 	String[] sonnet;
+
+	// Function to generate a sonnet
 
 	public String[] writeSonnet() {
 		StringBuilder sonnet = new StringBuilder();
