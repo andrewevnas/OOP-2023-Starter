@@ -10,7 +10,7 @@ public class DANI extends PApplet {
 
 	// Processing setup function to set window size
     public void settings() {
-        size(500, 500);
+        size(800, 800);
         //fullScreen(SPAN);
     }
 
