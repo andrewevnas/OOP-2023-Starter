@@ -17,7 +17,7 @@ public class DANI extends PApplet {
 	// Processing setup function to set color mode, frame rate, and load the text file
     public void setup() {
         colorMode(HSB);
-		frameRate(4);
+	
         loadFile("shakespere.txt");
     }
 
@@ -68,10 +68,10 @@ public class DANI extends PApplet {
     public void keyPressed() {
 		if (key == ' ') {
 		  // Generate a new sonnet
-		  String[] sonnetText = writeSonnet();
+		  sonnet = writeSonnet();
 	  
 		  // Print the sonnet to the console
-		  System.out.println(sonnetText);
+		  System.out.println(sonnet);
 		}
 	  }
 
@@ -126,9 +126,8 @@ public class DANI extends PApplet {
 		textSize(20);
 		textAlign(CENTER, CENTER);
 		
-		// Generate the sonnet
-		String[] sonnet = writeSonnet();
-		
+		// Check is sonnet array is null
+		if (this.sonnet == null) return;
 		// Calculate the height of each line of text
 		float lineHeight = height / (sonnet.length + 2);
 		
